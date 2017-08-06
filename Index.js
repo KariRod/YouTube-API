@@ -37,15 +37,17 @@ function search(q, callback) {
   
 
   var settings = {
-    url: YOUTUBE_SEARCH_URL,
-    part: 'snippet, id'
-    q:q,
+    url: 'https://www.googleapis.com/youtube/v3/search',
+    part: 'snippet,id',
+    q:q,per_page: 5,
     dataType: 'json',
-    type: 'GET',
-    key:'AIzaSyCQd2MY6h1edXhD0edauCGvqgRpuUtx1TA',
+    type: 'video',
+    key:'AIzaSyClt6W5LvSDHukj1MWnczgCv-ayAC9r2CM',
     success: callback
   };
-  $.ajax(settings);
+  $.ajax(settings).done(function (response){
+    console.log (response)
+  });
 }
 console.log(search);
 
@@ -71,7 +73,7 @@ function watchSubmit() {
     var query = queryTarget.val();
     // clear out the input
     queryTarget.val("");
-    getDataFromApi(query, displayYouTubeSearchData);
+    search(query, displayYouTubeSearchData);
   });
 }
 
